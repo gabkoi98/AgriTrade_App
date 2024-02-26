@@ -177,11 +177,6 @@ const Home = ({ navigation }) => {
                     style={styles.image}
                     source={require("../assets/Agricar.jpg")}
                   />
-
-                  <Image
-                    style={styles.image}
-                    source={require("../assets/planfield.jpg")}
-                  />
                 </Swiper>
               </View>
               <View style={styles.featureTextContainer}>

@@ -62,7 +62,6 @@ const Details = ({ route }) => {
         }
       );
 
-
       navigation.navigate("MainTabs", {
         screen: "AddToCart",
         params: {
@@ -152,7 +151,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   addButton: {
-    backgroundColor: "#00B251",
+    // backgroundColor: "#00B251",
+    backgroundColor: "reds",
     padding: 14,
     paddingHorizontal: 20,
     borderRadius: 15,
