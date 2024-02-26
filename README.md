@@ -1,0 +1,1 @@
+This project is call AgriTrade it is more like a Agriculture business site where people can go and buy there product. In Addition, this App is all about Agri product. my wisg is to do more on this projct.
