@@ -1,1 +1,1 @@
-This project is call AgriTrade it is more like a Agriculture business site where people can go and buy there product. In Addition, this App is all about Agri product. my wisg is to do more on this projct.
+This project is called AgriTrade, an agriculture-focused business app designed for users to conveniently purchase agricultural products. The platform exclusively caters to agricultural goods, providing a streamlined experience for buyers. My aspiration is to further develop and enhance this project.
