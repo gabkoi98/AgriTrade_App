@@ -146,11 +146,6 @@ const MainTabs = () => (
   </Tab.Navigator>
 );
 
-
-
-
-
-
 // Home Stack Screen
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
