@@ -345,3 +345,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
 });
+
+
+
+
+{/* <Text numberOfLines={5} style={styles.paraText}>
+          {product.description}
+        </Text> */}

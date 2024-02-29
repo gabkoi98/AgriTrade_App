@@ -18,6 +18,7 @@ const Details = ({ route }) => {
   const [count, setCount] = useState(1);
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const { productId } = route.params;
 
@@ -37,13 +38,11 @@ const Details = ({ route }) => {
     fetchProductDetails();
   }, [productId]);
 
-  if (isLoading || product === null) {
-    return (
-      <View style={styles.loading}>
-        <ActivityIndicator size="large" color="green" />
-      </View>
-    );
-  }
+  const toggleDescription = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const toggleButtonText = isExpanded ? " Read Less" : " Read More";
 
   const handleAddToCart = async () => {
     try {
@@ -72,30 +71,52 @@ const Details = ({ route }) => {
       console.log("Server Response:", response.data);
     } catch (error) {
       Alert.alert("", "Product already added to the cart", [{ text: "okay" }]);
-      // Alert.alert("", alertTitle, [{ text: okButtonText }], alertStyle);
     }
   };
+
   const formattedPrice = product ? product.price.toFixed(2) : 0;
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: product.image }} style={styles.productImage} />
+      {isLoading || product === null ? (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="green" />
+        </View>
+      ) : (
+        <>
+          {product.image ? (
+            <Image
+              source={{ uri: product.image }}
+              style={styles.productImage}
+            />
+          ) : (
+            <Text style={styles.errorText}>Image not available</Text>
+          )}
 
-      <View style={styles.nameContainer}>
-        <Text style={styles.riceText}>{product.productname}</Text>
-        <Text style={styles.prouctAmount}>${formattedPrice}</Text>
-      </View>
+          <View style={styles.detailsContainer}>
+            <Text style={styles.productName}>{product.productname}</Text>
+            <Text style={styles.productPrice}>${formattedPrice}</Text>
+          </View>
 
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.desText}>Description</Text>
-        <Text numberOfLines={5} style={styles.paraText}>
-          {product.description}
-        </Text>
-      </View>
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.sectionTitle}>Product Details</Text>
+            <Text style={styles.descriptionText}>
+              {isExpanded
+                ? product.description
+                : `${product.description.slice(0, 100)}...`}
+              <View>
+                <TouchableOpacity onPress={toggleDescription}>
+                  <Text style={styles.readMore}>{toggleButtonText}</Text>
+                </TouchableOpacity>
+              </View>
+            </Text>
+          </View>
 
-      <TouchableOpacity style={styles.addButton} onPress={handleAddToCart}>
-        <Text style={styles.buttonText}>Add to cart</Text>
-      </TouchableOpacity>
+          <TouchableOpacity style={styles.addButton} onPress={handleAddToCart}>
+            <Text style={styles.buttonText}>Add to Cart</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -107,63 +128,56 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     paddingHorizontal: 20,
-    marginTop: 100,
+    marginTop: 90,
   },
   productImage: {
     height: 200,
     width: "100%",
     borderRadius: 15,
   },
-  nameContainer: {
+  detailsContainer: {
     flexDirection: "row",
-    marginTop: 20,
     justifyContent: "space-between",
+    marginTop: 20,
   },
-  riceText: {
+  productName: {
     fontSize: 24,
     fontWeight: "bold",
     color: "black",
   },
-  prouctAmount: {
+  productPrice: {
     fontSize: 20,
     fontWeight: "bold",
     color: "black",
-  },
-  textItem: {
-    padding: 2,
-    backgroundColor: "green",
-    color: "white",
-    borderRadius: 100,
-  },
-  iconStyle: {
-    fontSize: 22,
   },
   descriptionContainer: {
     marginTop: 20,
   },
-  paraText: {
-    fontSize: 14,
-    marginTop: 10,
-    color: "black",
-  },
-  desText: {
+  sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
+    marginBottom: 10,
+  },
+  descriptionText: {
+    fontSize: 16,
+    color: "black",
+  },
+  readMore: {
+    color: "#00B251",
+    fontWeight: "bold",
+    paddingLeft: 1,
   },
 
   addButton: {
     backgroundColor: "#00B251",
-    // backgroundColor: "black",
     padding: 14,
-    paddingHorizontal: 20,
     borderRadius: 15,
     marginTop: 20,
-    width: "96%",
-    alignSelf: "center",
+    width: "100%",
+    alignItems: "center",
   },
   buttonText: {
     color: "white",
-    textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
   },
@@ -171,5 +185,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  errorText: {
+    fontSize: 16,
+    color: "red",
+    textAlign: "center",
+    marginTop: 20,
   },
 });

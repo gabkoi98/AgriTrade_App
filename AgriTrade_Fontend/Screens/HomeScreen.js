@@ -72,7 +72,7 @@ const Home = ({ navigation }) => {
     }
   }, [isFocused]);
 
-  const limitedProducts = useMemo(() => products.slice(0, 50), [products]);
+  const limitedProducts = useMemo(() => products.slice(0, 6), [products]);
 
   const handleSearch = (text) => {
     setSearchQuery(text);
@@ -111,7 +111,7 @@ const Home = ({ navigation }) => {
       ) : (
         <>
           <View style={styles.greetingHead}>
-            <Text style={styles.greetingheadText}>Welcome, {currentUser}.</Text>
+            <Text style={styles.greetingheadText}>Welcome, {currentUser}!</Text>
 
             <TouchableOpacity onPress={() => navigation.navigate("AddToCart")}>
               <View style={styles.headIcon}>
@@ -175,7 +175,7 @@ const Home = ({ navigation }) => {
                   />
                   <Image
                     style={styles.image}
-                    source={require("../assets/Agricar.jpg")}
+                    source={require("../assets/carFarm.jpg")}
                   />
                 </Swiper>
               </View>
@@ -236,7 +236,7 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
+    marginTop: 20,
   },
   keyboardAvoidingContainer: {
     flex: 1,

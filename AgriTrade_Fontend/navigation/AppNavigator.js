@@ -111,7 +111,6 @@ const MainTabs = () => (
         ),
         // tabBarBadge: 0,
         tabBarLabel: "Cart",
-        title: "My Cart",
         headerShown: false,
         tabBarLabelStyle: {
           fontSize: 15,
@@ -147,6 +146,11 @@ const MainTabs = () => (
   </Tab.Navigator>
 );
 
+
+
+
+
+
 // Home Stack Screen
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
@@ -163,8 +167,8 @@ const HomeStackScreen = () => (
       component={DetailScreen}
       options={{
         title: "Product Details",
-        // // headerTitleAlign: "center",
-        headerTitleAlign: "left",
+        headerTitleAlign: "center",
+        headerTitleAlign: "center",
         headerStyle: {
           borderBottomWidth: 0,
         },
@@ -178,12 +182,29 @@ const HomeStackScreen = () => (
         component={SeeAllproducts}
         options={{
           title: "See All Products ",
-          // headerTitleAlign: "center",
+          headerTitleAlign: "center",
           headerStyle: {
             borderBottomWidth: 0,
           },
           headerTintColor: "black",
           headerTransparent: true,
+        }}
+      />
+    }
+
+    {
+      <HomeStack.Screen
+        name="AddToCart"
+        component={AddToCartStackScreen}
+        options={{
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerTransparent: true,
+          headerShown: false,
+          headerTransparent: false,
+          headerStyle: {
+            borderBottomWidth: 0,
+          },
         }}
       />
     }
@@ -198,11 +219,15 @@ const AddToCartStackScreen = () => (
       options={{
         headerTitle: "My Cart",
         headerTitleAlign: "center",
+        headerTintColor: "black",
+        headerTransparent: true,
         headerStyle: {
           borderBottomWidth: 0,
         },
-        headerTintColor: "black",
-        headerTransparent: true,
+        headerTitleStyle: {
+          fontWeight: "bold",
+          fontSize: 20,
+        },
       }}
     />
     <AddToCartStack.Screen
@@ -210,12 +235,16 @@ const AddToCartStackScreen = () => (
       component={OrderSummaryScreen}
       options={{
         headerTitle: "Order Summary",
-        // headerTitleAlign: "center",
+        headerTitleAlign: "center",
+        headerTintColor: "black",
+        headerTransparent: true,
         headerStyle: {
           borderBottomWidth: 0,
         },
-        headerTintColor: "black",
-        headerTransparent: true,
+        headerTitleStyle: {
+          fontWeight: "bold",
+          fontSize: 20,
+        },
       }}
     />
     <AddToCartStack.Screen
@@ -223,12 +252,15 @@ const AddToCartStackScreen = () => (
       component={Payment}
       options={{
         headerTitle: "Payment methods",
-        // headerTitleAlig: "center",
+        headerTintColor: "black",
+        headerTransparent: true,
         headerStyle: {
           borderBottomWidth: 0,
         },
-        headerTintColor: "black",
-        headerTransparent: true,
+        headerTitleStyle: {
+          fontWeight: "bold",
+          fontSize: 20,
+        },
       }}
     />
   </AddToCartStack.Navigator>
