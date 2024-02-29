@@ -28,10 +28,14 @@ const Details = ({ route }) => {
         const response = await axios.get(`${URL}/product/${productId}`);
         const productData = response.data;
         setProduct(productData);
-        setIsLoading(false);
       } catch (error) {
-        setIsLoading(false);
         console.error("Error fetching product details:", error);
+        Alert.alert(
+          "Error",
+          "Failed to fetch product details. Please try again later."
+        );
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -42,15 +46,11 @@ const Details = ({ route }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const toggleButtonText = isExpanded ? " Read Less" : " Read More";
-
   const handleAddToCart = async () => {
     try {
       const loginData = await AsyncStorage.getItem("userData");
       const parsedData = JSON.parse(loginData);
-
       const { id } = parsedData;
-
       const payload = { quantity: count };
 
       const response = await axios.post(
@@ -70,7 +70,7 @@ const Details = ({ route }) => {
 
       console.log("Server Response:", response.data);
     } catch (error) {
-      Alert.alert("", "Product already added to the cart", [{ text: "okay" }]);
+      Alert.alert("Error", "Product already added to the cart");
     }
   };
 
@@ -99,19 +99,21 @@ const Details = ({ route }) => {
           </View>
 
           <View style={styles.descriptionContainer}>
-            <Text style={styles.sectionTitle}>Product Details</Text>
-            <Text style={styles.descriptionText}>
-              {isExpanded
-                ? product.description
-                : `${product.description.slice(0, 100)}...`}
-              <View>
-                <TouchableOpacity onPress={toggleDescription}>
-                  <Text style={styles.readMore}>{toggleButtonText}</Text>
-                </TouchableOpacity>
-              </View>
-            </Text>
-          </View>
+            <Text style={styles.sectionTitle}>Description</Text>
 
+            <View style={styles.descriptionTextContainer}>
+              <Text style={styles.descriptionText}>
+                {isExpanded
+                  ? product.description
+                  : `${product.description.slice(0, 135)}...`}
+              </Text>
+              {!isExpanded && (
+                <TouchableOpacity onPress={toggleDescription}>
+                  <Text style={styles.readMore}>Read More</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
           <TouchableOpacity style={styles.addButton} onPress={handleAddToCart}>
             <Text style={styles.buttonText}>Add to Cart</Text>
           </TouchableOpacity>
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
   productImage: {
     height: 200,
     width: "100%",
-    borderRadius: 15,
+    borderRadius: 18,
   },
   detailsContainer: {
     flexDirection: "row",
@@ -158,6 +160,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
   },
+  descriptionTextContainer: {
+    flexDirection: "column",
+  },
   descriptionText: {
     fontSize: 16,
     color: "black",
@@ -165,9 +170,10 @@ const styles = StyleSheet.create({
   readMore: {
     color: "#00B251",
     fontWeight: "bold",
-    paddingLeft: 1,
+    marginTop: -21,
+    paddingLeft: 135,
+    fontSize: 16,
   },
-
   addButton: {
     backgroundColor: "#00B251",
     padding: 14,

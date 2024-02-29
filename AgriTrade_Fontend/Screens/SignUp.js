@@ -15,9 +15,9 @@ import axios from "axios";
 import { URL } from "./constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AntDesign } from "@expo/vector-icons";
-import { Fontisto } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { EvilIcons } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 const Signup = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(true);
@@ -83,11 +83,13 @@ const Signup = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.appName}>Create account</Text>
+      <View style={styles.header}>
+        <Text style={styles.accName}>Create an account</Text>
+      </View>
 
       <KeyboardAwareScrollView extraHeight={120}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <SafeAreaView style={styles.formContainer}>
+          <View style={styles.formContainer}>
             <View style={styles.SignupformContainer}>
               <View style={[styles.searchBar, styles.searchBarWidth]}>
                 <AntDesign name="user" size={24} color="black" />
@@ -120,7 +122,7 @@ const Signup = ({ navigation }) => {
 
             <View style={styles.SignupformContainer}>
               <View style={[styles.searchBar, styles.searchBarWidth]}>
-                <Fontisto name="email" size={20} color="black" />
+                {<Fontisto name="email" size={20} color="black" />}
                 <View style={styles.searchInputContainer}>
                   <TextInput
                     placeholder="Enter email "
@@ -137,7 +139,7 @@ const Signup = ({ navigation }) => {
 
             <View style={styles.SignupformContainer}>
               <View style={[styles.searchBar, styles.searchBarWidth]}>
-                <EvilIcons name="lock" size={30} color="black" />
+                <Ionicons name="lock-open-outline" size={20} color="black" />
                 <View style={styles.searchInputContainer}>
                   <TextInput
                     secureTextEntry={showPassword}
@@ -162,7 +164,7 @@ const Signup = ({ navigation }) => {
 
             <View style={styles.SignupformContainer}>
               <View style={[styles.searchBar, styles.searchBarWidth]}>
-                <EvilIcons name="lock" size={30} color="black" />
+                <Ionicons name="lock-open-outline" size={20} color="black" />
                 <View style={styles.searchInputContainer}>
                   <TextInput
                     secureTextEntry={showConfirmPassword}
@@ -192,7 +194,7 @@ const Signup = ({ navigation }) => {
                 <Text style={styles.buttonText}>Signup</Text>
               </TouchableOpacity>
             </View>
-          </SafeAreaView>
+          </View>
         </TouchableWithoutFeedback>
       </KeyboardAwareScrollView>
     </View>
@@ -202,36 +204,27 @@ const Signup = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 100,
+    
+    backgroundColor: "#fff",
   },
 
-  appName: {
-    fontSize: 39,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 10,
-    color: "#00B251",
-  },
-
-  buttonContainer: {
-    marginTop: 13,
+  header: {
     backgroundColor: "#00B251",
-    borderRadius: 11,
-    paddingHorizontal: -5,
-    padding: 10,
-    paddingVertical: 15,
-    marginLeft: -1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 10,
+    borderRadius: 25,
   },
-
-  buttonText: {
+  accName: {
     fontSize: 20,
+    color: "#fff",
     textAlign: "center",
-    color: "white",
-    fontWeight: "bold",
+    marginTop: 100,
+    marginBottom: 78,
   },
 
   formContainer: {
-    marginTop: 40,
+    marginTop: 38,
     marginRight: 10,
     marginLeft: 20,
   },
@@ -262,17 +255,30 @@ const styles = StyleSheet.create({
 
   searchBarWidth: {
     alignItems: "center",
-    borderWidth: 1,
-    borderRadius: 10,
+
+    borderRadius: 20,
     paddingHorizontal: 10,
     marginBottom: 15,
-    height: 48,
+    height: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
   },
 
-  fieldText: {
-    textAlign: "right",
-    color: "black",
-    fontSize: 15,
+  buttonContainer: {
+    marginTop: 13,
+    backgroundColor: "#00B251",
+    borderRadius: 11,
+    paddingHorizontal: -5,
+    padding: 10,
+    paddingVertical: 15,
+    marginLeft: -1,
+  },
+
+  buttonText: {
+    fontSize: 20,
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
   },
 });
 
