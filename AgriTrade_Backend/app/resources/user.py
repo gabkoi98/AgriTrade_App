@@ -92,16 +92,13 @@ class GetUserResources(Resource):
             return user_schema.dump(user), 201
 
 
-
 class UserDeleteResource(Resource):
     @classmethod
-
     def delete(cls, user_id: int):
         user = Users.find_by_id(user_id)
 
         if not user:
-            return {"message": "user not found in this table"} , 401
+            return {"message": "User not found"}, 404 
+
         user.delete_from_db()
-        return {"message": "user delete sucesfully"} , 201
-
-
+        return {"message": "User deleted successfully"}, 200 

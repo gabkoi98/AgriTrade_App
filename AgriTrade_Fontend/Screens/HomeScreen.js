@@ -225,8 +225,6 @@ const Home = ({ navigation }) => {
               </View>
             </ScrollView>
           </KeyboardAvoidingView>
-
-          {/* Rest of your code */}
         </>
       )}
     </View>
